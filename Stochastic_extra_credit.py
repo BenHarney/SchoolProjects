@@ -32,11 +32,11 @@ def decay_step_2(num,prob_decay,prob_species):
     return number_Polonium212,number_Thallium208
     
 # Half-lives of the isotopes
-tau_Rn220 = 55.6       #Half-life of Radon
+tau_Rn220 = 55.6    #Half-life of Radon
 tau_Po216 = 0.145   #Half-life of Polonium 216
 tau_Pb212 = 38304   #Half-life of Lead 212
 tau_Bi212 = 3633    #Half-life of Bismuth 212
-tau_Po212 = 2.99e-7 #half-life of Polonium 212
+tau_Po212 = 2.99e-7 #Half-life of Polonium 212
 tau_Tl208 = 183.18  #Half-life of Thallium208
 
 
@@ -55,7 +55,7 @@ prob4 = 1-2**(-step/tau_Bi212)          #Probability of Bismuth 212 decay
 prob5 = 1-2**(-step/tau_Po212)          #Probability of Polonium 212 decay
 prob6 = 1-2**(-step/tau_Tl208)          #Probability of Thallium 208 decay
 
-
+#Abundances of the isotopes
 N_Rn220 = np.zeros(len(time),int)
 N_Po216 = np.zeros(len(time),int)
 N_Pb212 = np.zeros(len(time),int)
@@ -64,6 +64,7 @@ N_Po212 = np.zeros(len(time),int)
 N_Tl208 = np.zeros(len(time),int)
 N_Pb208 = np.zeros(len(time),int)
 N_Rn220[0] = initial
+
 
 for t in range(1,len(time)):
     decay_Bi212_Po212,decay_Bi212_Tl208 = decay_step_2(N_Bi212[t-1],prob4,prob_Polonium212)
@@ -81,7 +82,7 @@ for t in range(1,len(time)):
     N_Rn220[t] = N_Rn220[t-1] - decay_Rn220_Po216
     
     
-    
+#Plotting the data
 plt.plot(time, N_Rn220, label="Radon 220")
 plt.plot(time, N_Po216, label="Polonium 216")
 plt.plot(time, N_Pb212, label="Lead 212")
